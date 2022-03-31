@@ -32,19 +32,19 @@ public class CarServiceImpl extends BaseServiceImpl implements CarService {
       Boolean valid = false;
 
       if (StringUtils.isEmpty(req.getCarCd())) {
-         throw new ValidationException("messageCode", "Car Code");
+         throw new ValidationException("COMMNERR00034", "Car Code");
       } else {
          valid = true;
       }
 
       if (StringUtils.isEmpty(req.getCarName())) {
-         throw new ValidationException("messageCode", "Car Name");
+         throw new ValidationException("COMMNERR00034", "Car Name");
       } else {
          valid = true;
       }
 
       if (req.getCarYear() == null) {
-         throw new ValidationException("messageCode", "Car Year");
+         throw new ValidationException("COMMNERR00034", "Car Year");
       } else {
          valid = true;
       }
@@ -58,8 +58,8 @@ public class CarServiceImpl extends BaseServiceImpl implements CarService {
 
       CarEntity cekKey = repoCar.findById(req.getCarCd()).orElse(null);
 
-      if (cekKey != null && cekKey.getDeletedFlag()) {
-         throw new ValidationException("messageCode", "Car Code");
+      if (cekKey != null && !cekKey.getDeletedFlag()) {
+         throw new ValidationException("COMMNERR00009", "Car Code", req.getCarCd());
       }
       CarEntity carEntity = new CarEntity();
       CarComparisonEntity carCompEntity = new CarComparisonEntity();
@@ -72,7 +72,6 @@ public class CarServiceImpl extends BaseServiceImpl implements CarService {
          repoCar.save(carEntity);
          BeanUtils.copyProperties(reqComparison, carCompEntity);
          carCompEntity.setCarCd(req.getCarCd());
-         // carCompEntity.setCarFuelConsumption(reqComparison.getCarFuelConsumption());
          this.setCreateCommonD(carCompEntity, username);
          repoCarComparison.save(carCompEntity);
       }
@@ -88,11 +87,11 @@ public class CarServiceImpl extends BaseServiceImpl implements CarService {
    public CarResponse get(String carCd) {
 
       if (carCd.isEmpty()) {
-         throw new ValidationException("messageCode", "Car Code");
+         throw new ValidationException("COMMNERR00034", "Car Code");
       }
       CarEntity cekKey = repoCar.findById(carCd).orElse(null);
       if (cekKey == null || cekKey.getDeletedFlag()) {
-         throw new ValidationException("messageCode", "Car Code");
+         throw new ValidationException("COMMNERR00006", "Car Code", carCd);
       }
 
       CarComparisonEntity findComparison = repoCarComparison.findById(carCd).orElse(null);
