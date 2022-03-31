@@ -34,4 +34,7 @@ public class CarEntity extends CommonEntity {
 
    @Column(name = "car_transmisi")
    private String carTransmisi;
+
+   @Column(name = "car_year")
+   private Integer carYear;
 }

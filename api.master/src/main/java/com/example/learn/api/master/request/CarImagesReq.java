@@ -1,5 +1,10 @@
 package com.example.learn.api.master.request;
 
-public class CarImagesReq {
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+public class CarImagesReq {
+   private String imageCar;
 }

@@ -19,15 +19,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_car_image")
+@Table(name = "tb_car_comparison")
 public class CarComparisonEntity extends CommonEntityD {
 
    @Id
    @Column(name = "car_cd")
-   private String car;
-
-   @Column(name = "car_year")
-   private Integer carYear;
+   private String carCd;
 
    @Column(name = "car_price")
    private Integer carPrice;
@@ -39,7 +36,7 @@ public class CarComparisonEntity extends CommonEntityD {
    private Double carFuelConsumption;
 
    @Column(name = "car_mileage")
-   private BigDecimal carMieage;
+   private BigDecimal carMileage;
 
    @Column(name = "car_capacity")
    private Integer carCapacity;
