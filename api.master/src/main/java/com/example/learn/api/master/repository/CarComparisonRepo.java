@@ -12,4 +12,7 @@ public interface CarComparisonRepo extends JpaRepository<CarComparisonEntity, St
                   + " created_by, created_dt, changed_by, changed_dt "
                   + " FROM public.tb_car_comparison where car_cd = :carCd ", nativeQuery = true)
       Object[] getCar(@Param("carCd") String carCd);
+
+      @Query(value = " select count(1) from public.tb_car_pairwise_comparison_matrix_sum WHERE car_type= :carType  ", nativeQuery = true)
+      Integer cekCountCarType(@Param("carType") String carType);
 }
